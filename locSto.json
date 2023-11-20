@@ -1,0 +1,19 @@
+{
+    "ultimasCombinaciones": [
+        {
+            "numero": 5,
+            "limiteSuperior": 10,
+            "operatorValue": "multiply"
+        },
+        {
+            "numero": 8,
+            "limiteSuperior": 5,
+            "operatorValue": "sum"
+        },
+        {
+            "numero": 15,
+            "limiteSuperior": 7,
+            "operatorValue": "subtract"
+        }
+    ]
+}
