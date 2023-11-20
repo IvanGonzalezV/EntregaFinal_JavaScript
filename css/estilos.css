@@ -1,0 +1,204 @@
+@charset "UTF-8";
+/* Body settings */
+body {
+  background-image: url(../imagenes/pi.jpg);
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+/* MAin Container settings */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.container input {
+  background: darkviolet;
+  color: white;
+  text-align: center;
+}
+.container input::placeholder {
+  color: rgba(255, 255, 255, 0.466);
+}
+
+/* DIV JS settings */
+#resultados {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 28px;
+  border: solid 1px white;
+  background: #9932cc;
+  padding: 16px;
+}
+
+/* Botones settings*/
+.operation-buttons1 {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 17px;
+}
+
+#clear-button {
+  margin-left: 15px;
+  margin-bottom: 22px;
+}
+
+#clear-button {
+  --btn-default-bg: #010314;
+  --btn-padding: 15px 20px;
+  --btn-hover-bg: rgb(51, 51, 51);
+  --btn-transition: .3s;
+  --btn-letter-spacing: .1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #7241FF;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+}
+
+/* botones 2 settings 👆 */
+#clear-button {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  border-radius: 10px;
+  border: 2px solid #2A2B3A;
+}
+
+#clear-button span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+#clear-button span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+
+#clear-button:hover,
+#clear-button:focus {
+  background: var(--btn-default-bg);
+  box-shadow: 0px 0px 10px 0px rgba(119, 68, 255, 0.7);
+  border: 2px solid #7241FF;
+}
+
+#clear-button:hover span,
+#clear-button:focus span {
+  color: var(--hover-btn-color);
+}
+
+#clear-button:hover span::before,
+#clear-button:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+  5% {
+    content: ".";
+  }
+  10% {
+    content: "^{";
+  }
+  15% {
+    content: "-!";
+  }
+  20% {
+    content: "#$_";
+  }
+  25% {
+    content: "№:0";
+  }
+  30% {
+    content: "#)+.";
+  }
+  35% {
+    content: "@}-?";
+  }
+  40% {
+    content: "?{4@%";
+  }
+  45% {
+    content: "=.,^!";
+  }
+  50% {
+    content: "?2@%";
+  }
+  55% {
+    content: ";1}]";
+  }
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+  90% {
+    content: "4";
+    right: 0;
+  }
+  95% {
+    content: "2";
+    right: 0;
+  }
+  100% {
+    content: "";
+    right: 0;
+  }
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+/*# sourceMappingURL=estilos.css.map */

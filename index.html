@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="./imagenes/math_2.jpg">
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+
+<header>
+
+
+</header>
+
+<body>
+
+    <div class="container">
+        <div class="inputdata">
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="inputNumero" placeholder="Enter Digito">
+                <label for="inputNumero">Operador</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="inputLimiteSuperior" placeholder="Enter Digito">
+                <label for="inputLimiteSuperior">Límite</label>
+            </div>
+
+            <button id="calcular-button">Calcular Tabla</button>
+
+            <div class="operation-buttons1">
+                <button type="button" class="operation-button" value="sum">➕</button>
+                <button type="button" class="operation-button" value="subtract">➖</button>
+                <button type="button" class="operation-button" value="multiply">✖️</button>
+                <button type="button" class="operation-button" value="divide">➗</button>
+            </div>
+        </div>
+        <div id="resultados" class="resultados">
+        </div>
+
+
+        <button id="clear-button">
+            <span>
+                Clear
+            </span>
+        </button>
+
+    </div>
+
+    <div class="search-bar">
+        <select id="ultimas-combinaciones">
+            <option value="" disabled selected>Última Combinacion</option>
+        </select>
+    </div>
+
+
+
+
+
+
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
