@@ -1,64 +1,98 @@
 console.log("Curso de JS");
 
+console.log("Curso de JS");
+
 let inputNumero = document.getElementById("inputNumero");
 let inputLimiteSuperior = document.getElementById("inputLimiteSuperior");
-
 let calcularButton = document.getElementById("calcular-button");
-
-let operador = "multiply"; // Este Designa el Valor predeterminado (multiplicacion en esta app)
-
-calcularButton.addEventListener("click", () => {
-    let numero = parseInt(inputNumero.value);
-    let limiteSuperior = parseInt(inputLimiteSuperior.value);
-
-    let tablaMultiplicar = [];
-
-    // Ternarios para el operador sque se selccione
-    let operatorValue = document.querySelector(".operation-button.active")?.value || operador;
-
-    for (let i = 1; i <= limiteSuperior; i++) {
-    let resultado;
-    switch (operatorValue) {
-        case "sum":
-            resultado = numero + i;
-            break;
-        case "subtract":
-            resultado = numero - i;
-            break;
-        case "divide":
-            resultado = numero / i;
-            break;
-        default:
-            resultado = numero * i;
-    }
-
-    // Usa el mapeo para obtener el símbolo correspondiente
-    let operatorSymbol = operatorSymbols[operatorValue];
-
-    tablaMultiplicar.push(`${numero} ${operatorSymbol} ${i} = ${resultado}`);
-}
-
-
-    let resultadosDiv = document.getElementById("resultados");
-    resultadosDiv.innerHTML = tablaMultiplicar.join("<br>");
-
-    inputNumero.value = numero;
-    inputLimiteSuperior.value = limiteSuperior;
-
-    registrarCombinacion(numero, limiteSuperior, operatorValue);
-});
-
 let clearButton = document.getElementById("clear-button");
+let ultimasCombinaciones = [];
 
-clearButton.addEventListener("click", () => {
-    let resultadosDiv = document.getElementById("resultados");
-    resultadosDiv.innerHTML = '';
-    inputNumero.value = '';
-    inputLimiteSuperior.value = '';
-    guardarResultadosEnLocalStorage();
+/* Agrego Fetch y Asicronia */
+calcularButton.addEventListener("click", async () => {
+    try {
+        let numero = parseInt(inputNumero.value);
+        let limiteSuperior = parseInt(inputLimiteSuperior.value);
+
+        let response = await fetch('./locSto.json'); // Ruta al JSON que cree para esta entrega final
+        let data = await response.json();
+
+        let tablaMultiplicar = [];
+
+        let operatorValue = document.querySelector(".operation-button.active")?.value || "multiply";
+
+        for (let i = 1; i <= limiteSuperior; i++) {
+            let resultado;
+            switch (operatorValue) {
+                case "sum":
+                    resultado = numero + i;
+                    break;
+                case "subtract":
+                    resultado = numero - i;
+                    break;
+                case "divide":
+                    resultado = numero / i;
+                    break;
+                default:
+                    resultado = numero * i;
+            }
+
+            let operatorSymbol = operatorSymbols[operatorValue];
+
+            tablaMultiplicar.push(`${numero} ${operatorSymbol} ${i} = ${resultado}`);
+        }
+
+        let resultadosDiv = document.getElementById("resultados");
+        resultadosDiv.innerHTML = tablaMultiplicar.join("<br>");
+
+        inputNumero.value = numero;
+        inputLimiteSuperior.value = limiteSuperior;
+
+        /* Sweet Alert2 cuando haya error */
+        Swal.fire({
+            icon: 'success',
+            title: 'Operación completada',
+            text: 'La tabla se ha calculado correctamente.',
+        });
+
+        registrarCombinacion(numero, limiteSuperior, operatorValue);
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al realizar la operación. Por favor, inténtalo de nuevo.',
+        });
+        console.error(error);
+    }
 });
 
-let ultimasCombinaciones = [];
+/* Sweet Alert2 para confirmar borrado de datos en la tabla */
+clearButton.addEventListener("click", () => {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esto borrará todos los resultados.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borrar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let resultadosDiv = document.getElementById("resultados");
+            resultadosDiv.innerHTML = '';
+            inputNumero.value = '';
+            inputLimiteSuperior.value = '';
+            guardarResultadosEnLocalStorage();
+
+            /* Sweet Alert2 para mensaje de exito */
+            Swal.fire(
+                'Borrado!',
+                'Todos los resultados han sido eliminados.',
+                'success'
+            );
+        }
+    });
+});
 
 function registrarCombinacion(numero, limiteSuperior, operatorValue) {
     ultimasCombinaciones.unshift({ numero, limiteSuperior, operator: operatorValue });
@@ -76,7 +110,6 @@ function llenarListaDesplegable() {
     }
 }
 
-// Aqui establezco la clase 'active' en el botón seleccionado cuando el usuario haga clic en alguno de los botons de operación
 const operationButtons = document.querySelectorAll(".operation-button");
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -92,7 +125,6 @@ const operatorSymbols = {
     divide: '➗'
 };
 
-// Función para guardar resultados en el almacenamiento local (storage)
 function guardarResultadosEnLocalStorage() {
     localStorage.setItem('tablaMultiplicar', JSON.stringify(ultimasCombinaciones));
 }
@@ -103,6 +135,3 @@ window.addEventListener('load', () => {
         llenarListaDesplegable();
     }
 });
-
-
-
