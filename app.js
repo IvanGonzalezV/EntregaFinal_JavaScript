@@ -19,6 +19,7 @@ calcularButton.addEventListener("click", async () => {
 
         let tablaMultiplicar = [];
 
+        /* ternario para el operador que se seleccione */
         let operatorValue = document.querySelector(".operation-button.active")?.value || "multiply";
 
         for (let i = 1; i <= limiteSuperior; i++) {
@@ -37,6 +38,7 @@ calcularButton.addEventListener("click", async () => {
                     resultado = numero * i;
             }
 
+            /* Usa el mapeo para obtener el simbolo correspondiente */
             let operatorSymbol = operatorSymbols[operatorValue];
 
             tablaMultiplicar.push(`${numero} ${operatorSymbol} ${i} = ${resultado}`);
@@ -110,6 +112,7 @@ function llenarListaDesplegable() {
     }
 }
 
+/* Aqui establezco la clase active en el boton para cuando el usuario haga click en alguno de los botones de operacion */
 const operationButtons = document.querySelectorAll(".operation-button");
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -125,6 +128,7 @@ const operatorSymbols = {
     divide: '➗'
 };
 
+/* funcion para guardar resultados en el local storage */
 function guardarResultadosEnLocalStorage() {
     localStorage.setItem('tablaMultiplicar', JSON.stringify(ultimasCombinaciones));
 }
