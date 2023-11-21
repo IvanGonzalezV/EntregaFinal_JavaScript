@@ -141,7 +141,7 @@ window.addEventListener('load', () => {
 });
 
  
-/* NUEVO */
+/* Nueva Fn para inciar el Quizz */
 function iniciarModoQuiz() {
     Swal.fire({
         icon: 'info',
@@ -199,7 +199,7 @@ function calcularRespuesta(numero1, numero2, operador) {
 
 async function realizarQuiz(preguntas) {
     const resultadosQuizzDiv = document.getElementById('resultados-quizz');
-    resultadosQuizzDiv.innerHTML = ''; // Limpiar div antes de mostrar los resultados del quiz
+    resultadosQuizzDiv.innerHTML = ''; // Limpiar div antes de mostrar los resultados del quizz
 
     for (const pregunta of preguntas) {
         const { value: respuestaUsuario } = await Swal.fire({
@@ -214,7 +214,7 @@ async function realizarQuiz(preguntas) {
         });
 
         if (respuestaUsuario === undefined) {
-            // El usuario hizo clic en "Saltar"
+            // cuando se haga clic en "Saltar"
             continue;
         }
 
@@ -239,7 +239,7 @@ function mostrarResultadoQuizz(resultado) {
     resultadosQuizzDiv.appendChild(resultadoDiv);
 }
 
-// Agregar el evento click para iniciar el modo quiz
+// Agrega el evento click para iniciar el modo quiz
 const iniciarQuizButton = document.getElementById('iniciar-quiz-button');
 iniciarQuizButton.addEventListener('click', iniciarModoQuiz);
 >>>>>>> js_nwrama
