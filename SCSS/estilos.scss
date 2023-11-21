@@ -233,3 +233,33 @@ body {
     top: 0;
     left: 10px;
 }
+
+/* Agrega este estilo en tu archivo de estilos CSS */
+
+#resultados-quizz {
+    background-color: white;
+    padding: 10px;
+    /* Ajusta el espacio interno según sea necesario */
+}
+
+#resultados-quizz {
+    color: white;
+    /* Cambia a blanco el color del texto */
+    /* Agrega cualquier otro estilo que desees para el div */
+    background-color: black;
+    /* Ejemplo de fondo negro */
+    padding: 10px;
+    /* Ajusta el espacio interno según sea necesario */
+}
+
+#resultados-quizz p {
+    color: white;
+}
+
+.correcto p {
+    color: white;
+}
+
+.incorrecto p {
+    color: white
+}
