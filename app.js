@@ -139,17 +139,13 @@ window.addEventListener('load', () => {
         llenarListaDesplegable();
     }
 });
-<<<<<<< HEAD
-=======
 
-
-/* NUEVO */
 function iniciarModoQuiz() {
     Swal.fire({
         icon: 'info',
         title: 'Modo Quiz',
         text: 'Tienes 10 segundos para prepararte. ¡El quiz comenzará pronto!',
-        timer: 10000,
+        timer: 5000,
         timerProgressBar: true,
         showConfirmButton: false
     }).then(() => {
