@@ -1,7 +1,5 @@
 console.log("Curso de JS");
 
-console.log("Curso de JS");
-
 let inputNumero = document.getElementById("inputNumero");
 let inputLimiteSuperior = document.getElementById("inputLimiteSuperior");
 let calcularButton = document.getElementById("calcular-button");
@@ -124,7 +122,7 @@ operationButtons.forEach((button) => {
 const operatorSymbols = {
     sum: '➕',
     subtract: '➖',
-    multiply: '✖️',
+    multiply: 'X',
     divide: '➗'
 };
 
@@ -139,3 +137,106 @@ window.addEventListener('load', () => {
         llenarListaDesplegable();
     }
 });
+
+
+/* NUEVO */
+function iniciarModoQuiz() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Modo Quiz',
+        text: 'Tienes 10 segundos para prepararte. ¡El quiz comenzará pronto!',
+        timer: 10000,
+        timerProgressBar: true,
+        showConfirmButton: false
+    }).then(() => {
+        generarPreguntasQuiz();
+    });
+}
+
+function generarPreguntasQuiz() {
+    const preguntas = [];
+    const operadores = ['sum', 'subtract', 'multiply', 'divide'];
+
+    for (let i = 0; i < 12; i++) {
+        const operador = operadores[Math.floor(Math.random() * operadores.length)];
+        const numero1 = Math.floor(Math.random() * 10) + 1;
+        const numero2 = Math.floor(Math.random() * 10) + 1;
+
+        const pregunta = {
+            numero1,
+            numero2,
+            operador,
+            respuesta: calcularRespuesta(numero1, numero2, operador)
+        };
+
+        preguntas.push(pregunta);
+    }
+
+    // Reorganizar aleatoriamente el array de preguntas
+    preguntas.sort(() => Math.random() - 0.5);
+
+    realizarQuiz(preguntas);
+}
+
+
+
+function calcularRespuesta(numero1, numero2, operador) {
+    switch (operador) {
+        case 'sum':
+            return numero1 + numero2;
+        case 'subtract':
+            return numero1 - numero2;
+        case 'multiply':
+            return numero1 * numero2;
+        case 'divide':
+            return numero1 / numero2;
+        default:
+            return 0;
+    }
+}
+
+async function realizarQuiz(preguntas) {
+    const resultadosQuizzDiv = document.getElementById('resultados-quizz');
+    resultadosQuizzDiv.innerHTML = ''; // Limpiar div antes de mostrar los resultados del quiz
+
+    for (const pregunta of preguntas) {
+        const { value: respuestaUsuario } = await Swal.fire({
+            icon: 'question',
+            title: 'Pregunta',
+            text: `Resuelve: ${pregunta.numero1} ${operatorSymbols[pregunta.operador]} ${pregunta.numero2}`,
+            input: 'text',
+            inputPlaceholder: 'Ingresa tu respuesta',
+            showCancelButton: true,
+            cancelButtonText: 'Saltar',
+            confirmButtonText: 'Enviar'
+        });
+
+        if (respuestaUsuario === undefined) {
+            // El usuario hizo clic en "Saltar"
+            continue;
+        }
+
+        const esCorrecta = parseInt(respuestaUsuario) === pregunta.respuesta;
+
+        const resultado = {
+            pregunta: `${pregunta.numero1} ${operatorSymbols[pregunta.operador]} ${pregunta.numero2}`,
+            respuestaUsuario,
+            esCorrecta
+        };
+
+        mostrarResultadoQuizz(resultado);
+    }
+}
+
+
+function mostrarResultadoQuizz(resultado) {
+    const resultadosQuizzDiv = document.getElementById('resultados-quizz');
+    const resultadoDiv = document.createElement('div');
+    resultadoDiv.className = resultado.esCorrecta ? 'correcto' : 'incorrecto';
+    resultadoDiv.innerHTML = `<p>${resultado.pregunta} = ${resultado.respuestaUsuario} (${resultado.esCorrecta ? 'Correcto' : 'Incorrecto'})</p>`;
+    resultadosQuizzDiv.appendChild(resultadoDiv);
+}
+
+// Agregar el evento click para iniciar el modo quiz
+const iniciarQuizButton = document.getElementById('iniciar-quiz-button');
+iniciarQuizButton.addEventListener('click', iniciarModoQuiz);
