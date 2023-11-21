@@ -1,7 +1,3 @@
-console.log("Curso de JS");
-
-console.log("Curso de JS");
-
 let inputNumero = document.getElementById("inputNumero");
 let inputLimiteSuperior = document.getElementById("inputLimiteSuperior");
 let calcularButton = document.getElementById("calcular-button");
@@ -183,17 +179,17 @@ function generarPreguntasQuiz() {
 
 
 function calcularRespuesta(numero1, numero2, operador) {
-    switch (operador) {
-        case 'sum':
-            return numero1 + numero2;
-        case 'subtract':
-            return numero1 - numero2;
-        case 'multiply':
-            return numero1 * numero2;
-        case 'divide':
-            return numero1 / numero2;
-        default:
-            return 0;
+    const operadores = {
+        'sum': (a, b) => a + b,
+        'subtract': (a, b) => a - b,
+        'multiply': (a, b) => a * b,
+        'divide': (a, b) => a / b,
+    };
+
+    if (operadores.hasOwnProperty(operador)) {
+        return operadores[operador](numero1, numero2);
+    } else {
+        return 0;
     }
 }
 
@@ -242,4 +238,5 @@ function mostrarResultadoQuizz(resultado) {
 // Agrega el evento click para iniciar el modo quiz
 const iniciarQuizButton = document.getElementById('iniciar-quiz-button');
 iniciarQuizButton.addEventListener('click', iniciarModoQuiz);
->>>>>>> js_nwrama
+
+
