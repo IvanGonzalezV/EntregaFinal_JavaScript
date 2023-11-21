@@ -145,7 +145,7 @@ function iniciarModoQuiz() {
         icon: 'info',
         title: 'Modo Quiz',
         text: 'Tienes 10 segundos para prepararte. ¡El quiz comenzará pronto!',
-        timer: 10000,
+        timer: 5000,
         timerProgressBar: true,
         showConfirmButton: false
     }).then(() => {
@@ -240,3 +240,5 @@ function mostrarResultadoQuizz(resultado) {
 // Agregar el evento click para iniciar el modo quiz
 const iniciarQuizButton = document.getElementById('iniciar-quiz-button');
 iniciarQuizButton.addEventListener('click', iniciarModoQuiz);
+
+
